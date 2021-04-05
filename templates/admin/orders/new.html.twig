@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sipariş Detay{% endblock %}
+{% block sidebar %} {{ include ('home/_usersidebar.html.twig') }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="table-responsive cart_info">
+            <div class="col-sm-8 col-sm-offset-1">
+                <h4><b>Sipariş Detayları</b></h4>
+                {{ include('orders/_form.html.twig') }}
+
+            </div>
+        </div>
+    </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,150 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %} Oturum Aç/{{ data[0].title }} {% endblock %}
+{% block keywords %} {{ data[0].keywords}} {% endblock %}
+{% block description %} {{ data[0].description}} {% endblock %}
+{% block sidebar %}
+
+    <style>
+        ul#menu-v, #menu-v ul
+        {
+            width:254px; /* Main Menu width */
+            border:1px solid rgba(190,190,190,0.3);
+            list-style:none; margin:0; padding:0;
+            z-index:9;
+        }
+
+        #menu-v li
+        {
+            margin:0;padding:0;
+            position:relative;
+            background-color:#f7e1b5; /*fallback color*/
+            background-color:rgba(0,0,0,0.4);
+            transition:background 0.2s;
+        }
+        #menu-v li:hover
+        {
+            background-color:rgba(0,0,0,0.2);
+        }
+
+        #menu-v a
+        {
+            font:normal 14px Arial;
+            border-top:0px solid rgba(190,190,190,0.3);
+            display:block;
+            color:#EEEEEE;
+            text-decoration:none;
+            line-height:30px;
+            padding-left:22px;
+            position:relative;
+        }
+
+        #menu-v li:first-child a
+        {
+            border-top:0;
+        }
+        #menu-v a:hover {
+            background-color: #f0ad4e;
+            color:white;
+        }
+        #menu-v a.arrow::after{
+            content:'';
+            position:absolute;
+            display:inline;
+            top:50%;
+            margin-top:-4px;
+            right:8px;
+            border-width:4px;
+            border-style:solid;
+            border-color:transparent transparent transparent white;
+            transition:border-color 0.5s;
+        }
+
+        #menu-v li a.arrow:hover::after
+        {
+            border-color:transparent transparent transparent #FFFFFF;
+        }
+
+        /*Sub level menu items
+        ---------------------------------------*/
+        #menu-v li ul
+        {
+            min-width:180px; /* Sub level menu min width */
+            position:absolute;
+            display:none;
+            left:100%;
+            top:50%; transform:translateY(-50%);
+        }
+
+        #menu-v li:hover > ul
+        {
+            display:block;
+        }
+    </style>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {{ include ('home/_usersidebar.html.twig') }}
+    {% endif %}
+{% endblock %}
+
+{% block content  %}
+    <div class="container">
+            <div class="col-sm-8 col-sm-offset-1">
+            <div class="login-form">
+            <table class="table table-condensed">
+                <thead>
+                <tr class="cart_menu">
+                    <td class="image"></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="cart_product">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            Kullanıcı Adı : {{ app.user.name }}<br>
+                            Mail Adresi : {{ app.user.email }}
+                        {% else %}
+                            {{ include ('messages.html.twig') }}
+                            <h1>Oturum Aç</h1>
+                            <form method="post">
+                                {% if error %}
+                                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                {% endif %}
+
+                                <h1 class="h3 mb-3 font-weight-normal"></h1>
+                                <label for="inputEmail" class="sr-only">Mail Adresi</label>
+                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Mail" required autofocus>
+                                <label for="inputPassword" class="sr-only">Şifre</label>
+                                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Şifre" required>
+
+                                <input type="hidden" name="_csrf_token"
+                                       value="{{ csrf_token('authenticate') }}"
+                                >
+
+                            {#
+                                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                                See https://symfony.com/doc/current/security/remember_me.html
+
+                                <div class="checkbox mb-3">
+                                    <label>
+                                        <input type="checkbox" name="_remember_me"> Remember me
+                                    </label>
+                                </div>
+                            #}
+
+                                <button class="btn btn-default" type="submit">
+                                    Giriş Yap
+                                </button>
+                            </form>
+                            <br>
+                            <a href="{{ path('new_user') }}" class="btn btn-primary"> Üye Ol</a>
+                        {% endif %}
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            </div>
+    </div>
+</section>
+{% endblock %}

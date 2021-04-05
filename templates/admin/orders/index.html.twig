@@ -1,0 +1,51 @@
+{% extends 'adminbase.html.twig' %}
+{% block title %}Sipariş Listesi{% endblock %}
+{% block content %}
+    <div class="main-content">
+        <h3> Sipariş Listesi</h3>
+        <div class="panel">
+            <div class="panel-heading">
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>İsmi</th>
+                                <th>Miktar</th>
+                                <th>Şehir</th>
+                                <th>Tel</th>
+                                <th>Kargo</th>
+                                <th>Not</th>
+                                <th>Durum</th>
+                                <th>Sipariş Tarihi</th>
+                                <th>Göster</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in orders %}
+                            <tr>
+                                <td>{{ order.name }}</td>
+                                <td>{{ order.amount }}TL</td>
+                                <td>{{ order.city }}</td>
+                                <td>{{ order.phone }}</td>
+                                <td>{{ order.shipinfo }}</td>
+                                <td>{{ order.note }}</td>
+                                <td>{{ order.status }}</td>
+                                <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>
+                                    <a href="javascript: openWin('{{ path('admin_orders_show', {'id': order.id}) }}','','toolbar=no,location=no,diractorles=0,status=no,top=100,left=200,menubar=no,scrollBars=no,resizable=no,width=500,height=450');">
+                                    Göster</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="10">Sipariş Bulunamadı.</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

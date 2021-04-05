@@ -1,0 +1,27 @@
+< THE SYMBOL TABLE >  code1.exe_  --  emu8086 assembler version: 4.08 
+===================================================================================================
+Name                     	Offset    	Size      	Type      	Segment   
+===================================================================================================
+DATA                     	00000     	-5        	SEGMENT   	(ITSELF)  
+DIZI                     	00000     	1         	VAR       	data      
+ENBUYUK                  	00002     	1         	VAR       	data      
+MESAJ                    	00003     	1         	VAR       	data      
+TOPLAM                   	0000C     	1         	VAR       	data      
+ORTALAMA                 	0000D     	1         	VAR       	data      
+MESAJ1                   	0000E     	1         	VAR       	data      
+MESAJ2                   	00016     	1         	VAR       	data      
+STACK                    	00002     	-5        	SEGMENT   	(ITSELF)  
+CODE                     	00012     	-5        	SEGMENT   	(ITSELF)  
+X                        	00013     	-1        	LABEL     	code      
+Y                        	00026     	-1        	LABEL     	code      
+GIT                      	00030     	-1        	LABEL     	code      
+GIT1                     	00033     	-1        	LABEL     	code      
+Z                        	00057     	-1        	LABEL     	code      
+SIL                      	000A6     	-1        	NEAR      	          
+IMLECKONUM               	000B5     	-1        	NEAR      	          
+KARAKTERYAZDIR           	000BC     	-1        	NEAR      	          
+YAZDIR                   	000C3     	-1        	NEAR      	          
+===================================================================================================
+[ 19.12.2017  --  23:18:29 ] 
+< END >
+ 

@@ -1,0 +1,64 @@
+{{ include ('messages.html.twig') }}
+<form class="form-horizontal" name="order"  action="{{ path('orders_new') }}" method="post">
+    <fieldset>
+        <hr>
+        <label class="col-sm-3 control-label">Ödenecek Tutar:</label>
+        <div class="control-group" col-sm-4>
+            <label class="col-sm-1 control-label">{{ total }}TL</label>
+            <!--<input type="text" name="orders[amount]" value="{{ total }}" placeholder="amount" class="input-xlarge"/>-->
+        </div><br>
+        <hr>
+        KARGO ALICI BİLGİLERİ
+        <hr>
+
+        <label class="col-sm-3 control-label">Adı ve Soyadı:</label>
+        <div class="control-group" col-sm-5>
+            <input type="text" name="orders[name]" value="{{ app.user.name }}" placeholder="Adınız.." class="input-xlarge"/>
+        </div>
+        <br>
+        <label class="col-sm-3 control-label">Adresi:</label>
+        <div class="control-group" col-sm-5>
+            <input type="text" name="orders[address]" value="{{ app.user.address }}" placeholder="Adresiniz.." class="input-xlarge"/>
+        </div>
+        <br>
+
+        <label class="col-sm-3 control-label">Şehir:</label>
+        <div class="control-group" col-sm-5>
+            <input type="text" name="orders[city]" value="{{ app.user.city }}" placeholder="Şehir.." class="input-xlarge"/>
+        </div>
+        <br>
+        <label class="col-sm-3 control-label">Telefon:</label>
+        <div class="control-group" col-sm-5>
+            <input type="text" name="orders[phone]" value="{{ app.user.phone }}" placeholder="Telefon" class="input-xlarge"/>
+        </div>
+        <hr>
+        KREDİ KARTI BİLGİLERİ
+        <hr>
+
+        <label class="col-sm-3 control-label">Adı ve Soyadı:</label>
+        <div class="control-group" col-sm-5>
+            <input type="text" name="cardholdername" placeholder="Kartın Üzerindeki İsim.." class="input-xlarge"/>
+        </div>
+        <br>
+        <label class="col-sm-3 control-label">Kart Numarası:</label>
+        <div class="control-group" col-sm-5>
+            <input type="text" name="cardholdernumber" placeholder="Kart Numarası.." class="input-xlarge"/>
+        </div>
+        <br>
+        <label class="col-sm-3 control-label">Son Kullanma Tarihi:</label>
+        <div class="control-group" col-sm-5>
+            <input type="text" name="cardvaliddates" placeholder="AY/YIL.." class="input-xlarge"/>
+        </div>
+        <br>
+        <label class="col-sm-3 control-label">Güvenlik Kodu:</label>
+        <div class="control-group" col-sm-5>
+            <input type="number" name="cardsecuritycode" placeholder="Güvenlik Kodu.." class="input-xlarge"/>
+        </div>
+        <br>
+        <input type="hidden" name="token" value="{{ csrf_token('form-order') }}"/>
+        <label class="col-sm-2 control-label">  </label>
+        <div class="control-group" col-sm-5>
+            <input type="submit" value="SATIN AL" class="shopBtn"/>
+        </div>
+    </fieldset>
+</form>

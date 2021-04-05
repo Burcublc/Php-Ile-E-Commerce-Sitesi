@@ -1,0 +1,23 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Ürün Düzenle{% endblock %}
+
+{% block content %}
+    <div class="main-content">
+
+        <h3> Ürün Düzenleme</h3>
+        {{ include('admin/messages.html.twig') }}
+        <div class="panel">
+
+
+            <div class="panel-body">
+                {{ include('admin/product/_form.html.twig', {'button_label': 'Update'}) }}
+
+                <a href="{{ path('admin_product_index') }}">Listeye Geri Dön</a>
+
+
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

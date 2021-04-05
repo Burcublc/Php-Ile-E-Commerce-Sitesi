@@ -1,0 +1,168 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}Sipariş Detayı{% endblock %}
+{% block sidebar %}
+
+    <style>
+        ul#menu-v, #menu-v ul
+        {
+            width:254px; /* Main Menu width */
+            border:1px solid rgba(190,190,190,0.3);
+            list-style:none; margin:0; padding:0;
+            z-index:9;
+        }
+
+        #menu-v li
+        {
+            margin:0;padding:0;
+            position:relative;
+            background-color:#f7e1b5; /*fallback color*/
+            background-color:rgba(0,0,0,0.4);
+            transition:background 0.2s;
+        }
+        #menu-v li:hover
+        {
+            background-color:rgba(0,0,0,0.2);
+        }
+
+        #menu-v a
+        {
+            font:normal 14px Arial;
+            border-top:0px solid rgba(190,190,190,0.3);
+            display:block;
+            color:#EEEEEE;
+            text-decoration:none;
+            line-height:30px;
+            padding-left:22px;
+            position:relative;
+        }
+
+        #menu-v li:first-child a
+        {
+            border-top:0;
+        }
+        #menu-v a:hover {
+            background-color: #f0ad4e;
+            color:white;
+        }
+        #menu-v a.arrow::after{
+            content:'';
+            position:absolute;
+            display:inline;
+            top:50%;
+            margin-top:-4px;
+            right:8px;
+            border-width:4px;
+            border-style:solid;
+            border-color:transparent transparent transparent white;
+            transition:border-color 0.5s;
+        }
+
+        #menu-v li a.arrow:hover::after
+        {
+            border-color:transparent transparent transparent #FFFFFF;
+        }
+
+        /*Sub level menu items
+        ---------------------------------------*/
+        #menu-v li ul
+        {
+            min-width:180px; /* Sub level menu min width */
+            position:absolute;
+            display:none;
+            left:100%;
+            top:50%; transform:translateY(-50%);
+        }
+
+        #menu-v li:hover > ul
+        {
+            display:block;
+        }
+    </style>
+    {{ include ('home/_usersidebar.html.twig') }}{% endblock %}
+{% block content %}
+            <div class="container">
+                <div class="table-responsive cart_info">
+                    <div class="col-sm-8 col-sm-offset-1">
+
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Ad Ve Soyad</th>
+                                    <td>{{ order.name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Toplam Fiyat</th>
+                                    <td>{{ order.amount }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Teslimat Adresi</th>
+                                    <td>{{ order.address }}</td>
+                                </tr>
+                                <tr>
+                                    <th>İl</th>
+                                    <td>{{ order.city }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Telefon Numarası</th>
+                                    <td>{{ order.phone }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Shipinfo</th>
+                                    <td>{{ order.shipinfo }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Durum</th>
+                                    <td>{{ order.status }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Note</th>
+                                    <td>{{ order.note }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Sipariş Tarihi</th>
+                                    <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Sıra No</th>
+                                <th>Ürün İsmi</th>
+                                <th>Satış Fiyatı</th>
+                                <th>Miktar</th>
+                                <th>Toplam</th>
+                                <th>Durum</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% set total=0 %}
+                            {% for rs in orderdetail %}
+                                <tr>
+                                    <td>{{ rs.id }}</td>
+                                    <td>{{ rs.name }}</td>
+                                    <td>{{ rs.price }}</td>
+                                    <td>{{ rs.quantity }}</td>
+                                    <td>{{ rs.amount }}</td>
+                                    <td>{{ rs.status }}</td>
+                                </tr>
+
+                                <!--<tr>
+                                    <td colspan="5">Order Detail</td>
+                                </tr>-->
+                            {% endfor %}
+                            <tr>
+                                <td colspan="5"><b>Toplam Alışveriş Tutarı:{{ order.amount }}TL</b></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <a href="{{ path('orders_index') }}">Listeye Geri Dön</a>
+            </div>
+        </div>
+    </div>
+    </section>
+
+{% endblock %}

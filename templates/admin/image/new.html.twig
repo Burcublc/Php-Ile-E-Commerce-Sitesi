@@ -1,0 +1,9 @@
+
+    <h1>Galeriye Yeni Resim Yükle</h1>
+
+    {{ include('admin/image/_form.html.twig') }}
+
+   {% for image in imagelist %}
+    <img src="{{ asset('uploads') }}/images/{{ image.image }}" height="200"> <br>
+       <a href="{{ path('admin_image_del', {'id':image.id, 'pid':image.productid}) }}" onclick="return confirm('Resmi Silmek İstediğinizden Emin Misiniz?');" class="btn btn-primary"><i class="fa fa-trash-o"></i>Sil</a>
+    {% endfor %}

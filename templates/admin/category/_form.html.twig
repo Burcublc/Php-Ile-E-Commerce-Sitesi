@@ -1,0 +1,39 @@
+
+<form method="post">
+        <div class="panel-body">
+            <p>Üst Kategori</p>
+            <!--<input type="text" name="category[parentid]" value="{{ category.parentid }}" class="form-control" placeholder="Title">-->
+            <select name="category[parentid]" class="form-control">
+                {% if category.parentid != 0 %}
+                    <option value="{{ category.parentid }}">{{ catname.title }}</option>
+                {% else %}
+                    <option value="0">Ana Kategori</option>
+                {% endif %}
+                <option value="0">Ana Kategori</option>
+                {% for cat in catlist %}
+                    <option value="{{ cat.id }}">{{ cat.title }}</option>
+                {% endfor %}
+            </select>
+            <p>Title</p>
+            <input type="text" name="category[title]" value="{{ category.title }}" class="form-control" placeholder="Title">
+            <br>
+            <p>Anahtar Kelimeler</p>
+            <input type="text" name="category[keywords]" value="{{ category.keywords }}" class="form-control"><br>
+            <p>Kısa Açıklamalar</p>
+            <input type="text" name="category[description]" value="{{ category.description }}" class="form-control" placeholder="Description">
+            <br><p>Aktiflik Durumu</p>
+            <select name="category[status]" class="form-control">
+                <option>{{ category.status }}</option>
+                <option>True</option>
+                <option>False</option>
+            </select>
+            <br><br>
+            <button type="submit" class="btn btn-warning pull-right">Kaydet</button>
+
+        </div>
+</form>
+
+
+
+
+

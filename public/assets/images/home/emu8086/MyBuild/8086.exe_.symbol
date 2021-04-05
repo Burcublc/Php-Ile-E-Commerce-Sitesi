@@ -1,0 +1,17 @@
+< THE SYMBOL TABLE >  8086.exe_  --  emu8086 assembler version: 4.08 
+===================================================================================================
+Name                     	Offset    	Size      	Type      	Segment   
+===================================================================================================
+DATA                     	00000     	-5        	SEGMENT   	(ITSELF)  
+SAYI                     	00000     	2         	VAR       	data      
+STACK                    	00001     	-5        	SEGMENT   	(ITSELF)  
+CODE                     	00011     	-5        	SEGMENT   	(ITSELF)  
+DONGU                    	0000D     	-1        	LABEL     	code      
+DONGU2                   	00013     	-1        	LABEL     	code      
+DONGU3                   	0001D     	-1        	LABEL     	code      
+GIT                      	00029     	-1        	LABEL     	code      
+SON                      	00030     	-1        	LABEL     	code      
+===================================================================================================
+[ 6.11.2017  --  03:38:39 ] 
+< END >
+ 

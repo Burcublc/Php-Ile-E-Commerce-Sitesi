@@ -1,0 +1,119 @@
+data segment
+dizi db 10,?,10 dup('')
+enbuyuk db ?
+mesaj db "enbuyuk:$"
+toplam db 0
+ortalama db ?
+mesaj1 db "toplam:$"
+mesaj2 db "ortalama:$"
+ends
+
+stack segment
+dw   128  dup(0)
+ends
+
+code segment
+
+mov ax, data
+mov ds, ax
+mov es, ax
+call sil
+mov dx,0000h
+call imleckonum
+mov cx,10
+x:
+lea dx,dizi
+mov ah,0Ah
+int 21h
+call yazdir
+inc si
+loop x
+mov cx,10
+mov si,offset dizi
+y:
+mov al,[si]
+cmp al,enbuyuk
+ja git
+jna git1
+git:
+mov enbuyuk,al
+git1:
+inc si
+loop y
+mov dx,0100h
+call imleckonum
+lea dx,mesaj
+call yazdir
+mov dx,0108h
+call imleckonum
+mov al,enbuyuk
+call karakteryazdir
+mov cx,10
+mov ax,0
+mov si,offset dizi
+z:
+mov al,[si]
+add toplam,al
+inc si
+loop z
+mov cx,10
+mov bx,0
+mov bl,toplam
+mov ax,bx
+div cl
+mov ortalama,al
+
+mov dx,0200h
+call imleckonum
+lea dx,mesaj1
+call yazdir
+mov dx,0207h
+call imleckonum
+mov al,toplam
+call karakteryazdir
+
+mov dx,0300h
+call imleckonum
+lea dx,mesaj2
+call yazdir
+mov dx,0209h
+call imleckonum
+mov al,ortalama
+call karakteryazdir
+
+mov ax, 4c00h
+int 21h
+ends
+sil proc near
+mov al,00h
+mov bh,45h
+mov cx,0000h
+mov dx,184Fh
+mov ah,06h
+int 10h
+ret
+sil endp
+imleckonum proc near
+mov ah,02h
+mov bh,00h
+int 10h
+ret
+imleckonum endp
+karakteryazdir proc near
+mov dl,al
+mov ah,02h
+int 21h
+
+ret
+karakteryazdir endp
+yazdir proc near
+mov ah,09h
+int 21h
+ret
+yazdir endp
+
+
+
+
+
+; [SOURCE]: C:\assembly\code1.asm

@@ -1,0 +1,58 @@
+{{ include('admin/messages.html.twig') }}
+<form method="post">
+<div class="panel-body">
+        <p>Kategori</p>
+        <select name="product[categoryid]" class="form-control">
+                {%  if(catname) %}
+            <option value="{{ product.categoryid }}">{{ catname[0].title }}</option>
+                {% endif %}
+            {% for cat in catlist %}
+                <option value="{{ cat.id }}">{{ cat.title }}</option>
+            {% endfor %}
+        </select><br>
+        <p>Ürünün İsmi</p>
+        <input type="text" name="product[title]" value="{{ product.title }}" class="form-control" placeholder="Ürünün İsmi">
+        <br>
+        <p>Anahtar Kelimeler</p>
+        <input type="text" name="product[keywords]" value="{{ product.keywords }}" class="form-control"><br>
+        <p>Kısa Açıklamalar</p>
+        <input type="text" name="product[description]" value="{{ product.description }}" class="form-control" placeholder="Açıklamalar"><br>
+        <p>Alış Fiyatı</p>
+        <input type="text" name="product[price]" value="{{ product.price }}" class="form-control" placeholder="Alış Fiyatı"><br>
+        <p>Satış Fiyatı</p>
+        <input type="text" name="product[sprice]" value="{{ product.sprice }}" class="form-control" placeholder="Satış Fiyatı"><br>
+        <p>Ürün Miktarı</p>
+        <input type="text" name="product[amount]" value="{{ product.amount }}" class="form-control" placeholder="Miktar"><br>
+        <p>Ürün Resmi</p>
+        <input type="text" name="product[image]" value="{{ product.image }}" class="form-control" placeholder="Resim"><br>
+        <p>Aktiflik Durumu</p>
+        <select name="product[status]" class="form-control">
+                <option>{{ product.status }}</option>
+                <option>True</option>
+                <option>False</option>
+        </select><br>
+        <p>En Çok Satanlar Durumu:</p>
+        <select name="product[encoksatanlar]" class="form-control">
+                <option>{{ product.encoksatanlar }}</option>
+                <option>True</option>
+                <option>False</option>
+        </select><br>
+        <p>Ürün Detay</p>
+        <textarea name="product[detail]" id="editor" class="form-control" placeholder="Ürün Hakkında.." rows="4" cols="100">{{ product.detail }}</textarea>
+
+        <br><br>
+
+
+        <button type="submit" class="btn btn-warning pull-right">Kaydet</button>
+
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#editor' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
+
+
+</div>
+</form>

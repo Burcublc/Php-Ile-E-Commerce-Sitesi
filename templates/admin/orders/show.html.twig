@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="tr">
+
+<head>
+    <title>{% block title %}Sipariş Detay{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="{{ asset('admin') }}/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('admin') }}/assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('admin') }}/assets/vendor/linearicons/style.css">
+    <link rel="stylesheet" href="{{ asset('admin') }}/assets/vendor/toastr/toastr.min.css">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{{ asset('admin') }}/assets/css/main.css">
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <link rel="stylesheet" href="{{ asset('admin') }}/assets/css/demo.css">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('admin') }}/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('admin') }}/assets/img/favicon.png">
+
+    <script language="JavaScript" type="text/javascript">
+        function openWin(windowsURL,windowName,windowsFeatures){ window.open(windowsURL,windowName,windowsFeatures);}
+
+    </script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
+
+</head>
+
+<body>
+    <section>
+            <div class="container">
+                <div class="table-responsive cart_info">
+                    <div class="col-sm-8 col-sm-offset-1">
+                        {{ include ('messages.html.twig') }}
+                        <h4>Sipariş Detayı</h4>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Ad Ve Soyad</th>
+                                    <td>{{ order.name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Toplam Fiyat</th>
+                                    <td>{{ order.amount }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Teslimat Adresi</th>
+                                    <td>{{ order.address }}</td>
+                                </tr>
+                                <tr>
+                                    <th>İl</th>
+                                    <td>{{ order.city }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Telefon Numarası</th>
+                                    <td>{{ order.phone }}</td>
+                                </tr>
+                                <form action="{{ path('admin_orders_update',{'id':order.id}) }}" method="post">
+                                    <tr>
+                                        <th>Kargo Bilgisi</th>
+                                        <td><textarea name="shipinfo" cols="100" rows="3">{{ order.shipinfo }}</textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Yönetici Notu</th>
+                                        <td><textarea name="note" cols="100" rows="3">{{ order.note }}</textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Durum</th>
+                                        <td>
+                                            <select name="status">
+                                                <option value="{{ order.status }}">{{ order.status }}</option>
+                                                <option value="canceled">Canceled</option>
+                                                <option value="accepted">Accepted</option>
+                                                <option value="inshipping">In Shipping</option>
+                                                <option value="completed">Completed</option>
+                                            </select></td>
+                                    </tr>
+                                        <input type="submit" value="Güncelle">
+
+                                </form>
+                                <tr>
+                                    <th>Sipariş Tarihi</th>
+                                    <td>{{ order.createdAt }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Product Name</th>
+                                <th>Sale Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% set total=0 %}
+                            {% for rs in orderdetail %}
+                                <tr>
+                                    <td>{{ rs.id }}</td>
+                                    <td>{{ rs.name }}</td>
+                                    <td>{{ rs.price }}</td>
+                                    <td>{{ rs.quantity }}</td>
+                                    <td>{{ rs.amount }}</td>
+                                    <td>{{ rs.status }}</td>
+                                </tr>
+
+                                <!--<tr>
+                                    <td colspan="5">Order Detail</td>
+                                </tr>-->
+                            {% endfor %}
+                            <tr>
+                                <td colspan="5"><b>Toplam Alışveriş Tutarı:{{ order.amount }}TL</b></td>
+                            </tr>
+                            </tbody>
+                        </table>
+            </div>
+        </div>
+    </div>
+    </section>
+
+</body>

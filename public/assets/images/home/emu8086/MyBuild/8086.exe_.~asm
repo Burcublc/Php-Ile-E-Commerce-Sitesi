@@ -1,0 +1,47 @@
+
+data segment
+sayi dw 5,6,9,8,10
+ends
+
+stack segment
+dw   128  dup(0)
+ends
+
+code segment
+
+mov ax, @data
+mov ds, ax
+mov si,offset sayi
+mov ax, [si]
+mov bx,[si+2]
+dongu:
+cmp ax,bx
+jb dongu2
+jmp dongu3
+dongu2:
+add si,2
+mov ax,[si]
+mov bx,[si+2]
+jmp dongu
+dongu3:
+add si,2
+mov bx,[si+2]
+cmp ax,bx
+ja son
+jmp git
+git:
+mov cx,bx
+mov ax,4c00h
+int 21h
+son:
+mov cx,ax
+
+mov ax, 4c00h
+int 21h
+ends
+
+
+
+
+
+; [SOURCE]: C:\Users\SAMSUNG\Desktop\8086.exe

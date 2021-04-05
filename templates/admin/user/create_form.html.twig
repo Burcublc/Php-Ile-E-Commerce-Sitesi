@@ -1,0 +1,44 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %} Üye Ekleme{% endblock %}
+
+{% block content %}
+    <div class="main-content">
+      <h1>Üye Ekleme</h1>
+    </div>
+    <div class="panel">
+        <div class="panel-heading">
+            <h3 class="panel-title">Yeni Üye Ekleme</h3>
+        </div>
+        <form method="post">
+            <div class="panel-body">
+                <p>Adı Soyadı:</p>
+                <div class="input-group" >
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <input class="form-control"  name="users[name]" placeholder="Ad ve Soyad" type="text">
+                </div>
+               <br>
+                <p>Email</p>
+                <input type="email" name="users[email]" class="form-control" placeholder="Email">
+                <br>
+                <p>Password</p>
+                <input type="password" name="users[password]" class="form-control"  placeholder="password">
+                <br>
+                <p>Kullanıcı Tipi</p>
+                <select name="users[roles]" class="form-control">
+                    <option>ROLE_ADMİN</option>
+                    <option>ROLE_USER</option>
+                </select>
+                <br><p>Aktiflik Durumu:</p>
+                <select name="users[status]" class="form-control">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+                <br><br>
+
+                <button type="submit" class="btn btn-warning pull-right">Kaydet</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

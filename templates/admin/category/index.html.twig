@@ -1,0 +1,65 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %} Kategori Listesi{% endblock %}
+
+{% block content %}
+    <div class="main-content">
+        {{ include('admin/messages.html.twig') }}
+        <h3> Kategori Listesi</h3>
+        <div class="panel">
+            <div class="panel-heading">
+                <h1>
+                    <small><a href="{{ path('admin_category_new') }}" class="btn btn-info">Yeni Kategori Ekle</a></small>
+                </h1>
+
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>parentid</th>
+                        <th>Title</th>
+                        <th>Keywords</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Göster</th>
+                        <th>Düzenle</th>
+                        <th>Sİl</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for category in categories %}
+                        <tr>
+                            <td>{{ category.id }}</td>
+                            <td>{{ category.parentid }}</td>
+                            <td>{{ category.title }}</td>
+                            <td>{{ category.keywords }}</td>
+                            <td>{{ category.description }}</td>
+                            <td>{{ category.status }}</td>
+                            <td>
+                                <a href="{{ path('admin_category_show', {'id': category.id}) }}" class="btn btn-info">Göster</a> </td>
+                            <td>
+                                <a href="{{ path('admin_category_edit', {'id': category.id , 'pid': category.parentid}) }}"  class="btn btn-primary">Düzenle</a>
+                            </td>
+                            <td>
+                                {{ include('admin/category/_delete_form.html.twig') }}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">Kayıt Bulunamadı..</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <!-- END MAIN CONTENT -->
+
+{% endblock %}

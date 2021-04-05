@@ -1,0 +1,11 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Ayarları Düzenle{% endblock %}
+
+{% block content %}
+    <h1>Ayarlar Düzenle</h1>
+
+    {{ include('admin/setting/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+{% endblock %}

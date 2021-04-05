@@ -1,0 +1,123 @@
+{% extends 'frontbase.html.twig' %}
+{% block title %}  {{ data[0].title }}/Bize Ulaşın {% endblock %}
+{% block keywords %} {{ data[0].keywords}} {% endblock %}
+{% block description %}  {{ data[0].description}} {% endblock %}
+{%  block sidebar  %}
+
+    <style>
+        ul#menu-v, #menu-v ul
+        {
+            width:254px; /* Main Menu width */
+            border:1px solid rgba(190,190,190,0.3);
+            list-style:none; margin:0; padding:0;
+            z-index:9;
+        }
+
+        #menu-v li
+        {
+            margin:0;padding:0;
+            position:relative;
+            background-color:#f7e1b5; /*fallback color*/
+            background-color:rgba(0,0,0,0.4);
+            transition:background 0.2s;
+        }
+        #menu-v li:hover
+        {
+            background-color:rgba(0,0,0,0.2);
+        }
+
+        #menu-v a
+        {
+            font:normal 14px Arial;
+            border-top:0px solid rgba(190,190,190,0.3);
+            display:block;
+            color:#EEEEEE;
+            text-decoration:none;
+            line-height:30px;
+            padding-left:22px;
+            position:relative;
+        }
+
+        #menu-v li:first-child a
+        {
+            border-top:0;
+        }
+        #menu-v a:hover {
+            background-color: #f0ad4e;
+            color:white;
+        }
+        #menu-v a.arrow::after{
+            content:'';
+            position:absolute;
+            display:inline;
+            top:50%;
+            margin-top:-4px;
+            right:8px;
+            border-width:4px;
+            border-style:solid;
+            border-color:transparent transparent transparent white;
+            transition:border-color 0.5s;
+        }
+
+        #menu-v li a.arrow:hover::after
+        {
+            border-color:transparent transparent transparent #FFFFFF;
+        }
+
+        /*Sub level menu items
+        ---------------------------------------*/
+        #menu-v li ul
+        {
+            min-width:180px; /* Sub level menu min width */
+            position:absolute;
+            display:none;
+            left:100%;
+            top:50%; transform:translateY(-50%);
+        }
+
+        #menu-v li:hover > ul
+        {
+            display:block;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+<div class="row">
+
+    <div class="col-sm-8">
+        <div class="contact-form">
+            <h2 class="title text-center">Bize Ulaşın</h2>
+            {{ include('messages.html.twig') }}
+            <div class="status alert alert-success" style="display: none"></div>
+            <form id="main-contact-form" class="contact-form row" name="messages" method="post" style="margin-left: 2px">
+
+                <div class="form-group col-md-6">
+                    <input type="text" name="messages[name]" class="form-control" required="required" placeholder="İsminiz">
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="email" name="messages[email]" class="form-control" required="required" placeholder="Mail Adresiniz">
+                </div>
+                <div class="form-group col-md-12">
+                    <input type="text" name="messages[subject]" class="form-control" required="required" placeholder="Konu">
+                </div>
+                <div class="form-group col-md-12">
+                    <textarea name="messages[message]" required="required" class="form-control" rows="8" placeholder="Mesajınız..."></textarea>
+                </div>
+                <div class="form-group col-md-12">
+                    <input type="hidden" name="token" value="{{ csrf_token('form-messeage') }}">
+                    <input type="submit"  class="btn btn-primary pull-right" value="Gönder">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="contact-info">
+            <h2 class="title text-center">İletişim Bilgileri</h2>
+            <address>
+                <p>  {{ data[0].contact|raw }}</p>
+
+            </address>
+        </div>
+    </div>
+</div>
+{% endblock %}

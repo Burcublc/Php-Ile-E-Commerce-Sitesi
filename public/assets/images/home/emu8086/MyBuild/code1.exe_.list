@@ -1,0 +1,192 @@
+EMU8086 GENERATED LISTING. MACHINE CODE <- SOURCE.
+ 
+code1.exe_ -- emu8086 assembler version: 4.08  
+ 
+[ 19.12.2017  --  23:18:29 ] 
+ 
+===================================================================================================
+[LINE]     LOC: MACHINE CODE                          SOURCE
+===================================================================================================
+ 
+[   1]        :                                       data segment
+[   2]    0000: 0A 00                                 dizi db 10,?,10 dup('')
+[   3]    0002: 00                                    enbuyuk db ?
+[   4]    0003: 65 6E 62 75 79 75 6B 3A 24            mesaj db "enbuyuk:$"
+[   5]    000C: 00                                    toplam db 0
+[   6]    000D: 00                                    ortalama db ?
+[   7]    000E: 74 6F 70 6C 61 6D 3A 24               mesaj1 db "toplam:$"
+[   8]    0016: 6F 72 74 61 6C 61 6D 61 3A 24         mesaj2 db "ortalama:$"
+[   9]        :                                       ends
+[  10]        :                                       
+[  11]        :                                       stack segment
+[  12]    0020: 00 00 00 00 00 00 00 00 00 00 00 00   dw   128  dup(0)
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00                         
+[  13]        :                                       ends
+[  14]        :                                       
+[  15]        :                                       code segment
+[  16]        :                                       
+[  17]    0120: B8 00 00                              mov ax, data
+[  18]    0123: 8E D8                                 mov ds, ax
+[  19]    0125: 8E C0                                 mov es, ax
+[  20]    0127: E8 9C 00                              call sil
+[  21]    012A: BA 00 00                              mov dx,0000h
+[  22]    012D: E8 A5 00                              call imleckonum
+[  23]    0130: B9 0A 00                              mov cx,10
+[  24]    0133:                                       x:
+[  25]    0133: BA 00 00                              lea dx,dizi
+[  26]    0136: B4 0A                                 mov ah,0Ah
+[  27]    0138: CD 21                                 int 21h
+[  28]    013A: E8 A6 00                              call yazdir
+[  29]    013D: 46                                    inc si
+[  30]    013E: E2 F3                                 loop x
+[  31]    0140: B9 0A 00                              mov cx,10
+[  32]    0143: BE 00 00                              mov si,offset dizi
+[  33]    0146:                                       y:
+[  34]    0146: 8A 04                                 mov al,[si]
+[  35]    0148: 3A 06 02 00                           cmp al,enbuyuk
+[  36]    014C: 77 02                                 ja git
+[  37]    014E: 76 03                                 jna git1
+[  38]    0150:                                       git:
+[  39]    0150: A2 02 00                              mov enbuyuk,al
+[  40]    0153:                                       git1:
+[  41]    0153: 46                                    inc si
+[  42]    0154: E2 F0                                 loop y
+[  43]    0156: BA 00 01                              mov dx,0100h
+[  44]    0159: E8 79 00                              call imleckonum
+[  45]    015C: BA 03 00                              lea dx,mesaj
+[  46]    015F: E8 81 00                              call yazdir
+[  47]    0162: BA 08 01                              mov dx,0108h
+[  48]    0165: E8 6D 00                              call imleckonum
+[  49]    0168: A0 02 00                              mov al,enbuyuk
+[  50]    016B: E8 6E 00                              call karakteryazdir
+[  51]    016E: B9 0A 00                              mov cx,10
+[  52]    0171: B8 00 00                              mov ax,0
+[  53]    0174: BE 00 00                              mov si,offset dizi
+[  54]    0177:                                       z:
+[  55]    0177: 8A 04                                 mov al,[si]
+[  56]    0179: 00 06 0C 00                           add toplam,al
+[  57]    017D: 46                                    inc si
+[  58]    017E: E2 F7                                 loop z
+[  59]    0180: B9 0A 00                              mov cx,10
+[  60]    0183: BB 00 00                              mov bx,0
+[  61]    0186: 8A 1E 0C 00                           mov bl,toplam
+[  62]    018A: 8B C3                                 mov ax,bx
+[  63]    018C: F6 F1                                 div cl
+[  64]    018E: A2 0D 00                              mov ortalama,al
+[  65]        :                                       
+[  66]    0191: BA 00 02                              mov dx,0200h
+[  67]    0194: E8 3E 00                              call imleckonum
+[  68]    0197: BA 0E 00                              lea dx,mesaj1
+[  69]    019A: E8 46 00                              call yazdir
+[  70]    019D: BA 07 02                              mov dx,0207h
+[  71]    01A0: E8 32 00                              call imleckonum
+[  72]    01A3: A0 0C 00                              mov al,toplam
+[  73]    01A6: E8 33 00                              call karakteryazdir
+[  74]        :                                       
+[  75]    01A9: BA 00 03                              mov dx,0300h
+[  76]    01AC: E8 26 00                              call imleckonum
+[  77]    01AF: BA 16 00                              lea dx,mesaj2
+[  78]    01B2: E8 2E 00                              call yazdir
+[  79]    01B5: BA 09 02                              mov dx,0209h
+[  80]    01B8: E8 1A 00                              call imleckonum
+[  81]    01BB: A0 0D 00                              mov al,ortalama
+[  82]    01BE: E8 1B 00                              call karakteryazdir
+[  83]        :                                       
+[  84]    01C1: B8 00 4C                              mov ax, 4c00h
+[  85]    01C4: CD 21                                 int 21h
+[  86]        :                                       ends
+[  87]    01C6:                                       sil proc near
+[  88]    01C6: B0 00                                 mov al,00h
+[  89]    01C8: B7 45                                 mov bh,45h
+[  90]    01CA: B9 00 00                              mov cx,0000h
+[  91]    01CD: BA 4F 18                              mov dx,184Fh
+[  92]    01D0: B4 06                                 mov ah,06h
+[  93]    01D2: CD 10                                 int 10h
+[  94]    01D4: C3                                    ret
+[  95]        :                                       sil endp
+[  96]    01D5:                                       imleckonum proc near
+[  97]    01D5: B4 02                                 mov ah,02h
+[  98]    01D7: B7 00                                 mov bh,00h
+[  99]    01D9: CD 10                                 int 10h
+[ 100]    01DB: C3                                    ret
+[ 101]        :                                       imleckonum endp
+[ 102]    01DC:                                       karakteryazdir proc near
+[ 103]    01DC: 8A D0                                 mov dl,al
+[ 104]    01DE: B4 02                                 mov ah,02h
+[ 105]    01E0: CD 21                                 int 21h
+[ 106]        :                                       
+[ 107]    01E2: C3                                    ret
+[ 108]        :                                       karakteryazdir endp
+[ 109]    01E3:                                       yazdir proc near
+[ 110]    01E3: B4 09                                 mov ah,09h
+[ 111]    01E5: CD 21                                 int 21h
+[ 112]    01E7: C3                                    ret
+[ 113]        :                                       yazdir endp
+[ 114]        :                                       
+[ 115]        :                                       
+[ 116]        :                                       
+ 
+===================================================================================================
+ 
+EXE HEADER - bytes from 0000 to 01FF inclusive.
+
+0000: 4D      -   exe signature (M)
+0001: 5A      -   exe signature (Z)
+0002: E8      -   bytes on last page (l.byte)
+0003: 01      -   bytes on last page (h.byte)
+0004: 02      -   512 byte pages in file (l.byte)
+0005: 00      -   512 byte pages in file (h.byte)
+0006: 01      -   relocations (l.byte)
+0007: 00      -   relocations (h.byte)
+0008: 20      -   paragraphs in header (l.byte)
+0009: 00      -   paragraphs in header (h.byte)
+000A: 00      -   minimum memory (l.byte)
+000B: 00      -   minimum memory (h.byte)
+000C: FF      -   maximum memory (l.byte)
+000D: FF      -   maximum memory (h.byte)
+000E: 02      -   SS - stack segment (l.byte)
+000F: 00      -   SS - stack segment (h.byte)
+0010: 00      -   SP - stack pointer (l.byte)
+0011: 01      -   SP - stack pointer (h.byte)
+0012: 81      -   check sum (l.byte)
+0013: 38      -   check sum (h.byte)
+0014: 00      -   IP - instruction pointer (l.byte)
+0015: 00      -   IP - instruction pointer (h.byte)
+0016: 12      -   CS - code segment (l.byte)
+0017: 00      -   CS - code segment (h.byte)
+0018: 1E      -   relocation table adress (l.byte)
+0019: 00      -   relocation table adress (h.byte)
+001A: 00      -   overlay number (l.byte)
+001B: 00      -   overlay number (h.byte)
+001C: 01      -   signature (l.byte)
+001D: 00      -   signature (h.byte)
+001E: 01      -   relocation table - offset inside segment (l.byte)
+001F: 00      -   relocation table - offset inside segment (h.byte)
+0020: 12      -   relocation table - segment anchor (l.byte)
+0021: 00      -   relocation table - segment anchor (h.byte)
+0022 to 01FF  -   reserved relocation area  (00) 
+
+
+
+
+===================================================================================================

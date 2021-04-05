@@ -1,0 +1,89 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}Ürün Detayı/{{ data[0].title }} {% endblock %}
+{% block keywords %} {{ data[0].keywords}} {% endblock %}
+{% block description %} {{ data[0].description}} {% endblock %}
+{%  block sidebar  %} {{ include ('home/_sidebar.html.twig') }} {% endblock %}
+{% block content %}
+    <div class="col-sm-9 padding-right">
+        <div class="product-details">
+            <div class="col-sm-5">
+                <div class="view-product">
+                    <div id="similar-product" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <a href="#"><img src="{{ asset('uploads') }}/images/{{ data[0].image }}" alt=""></a>
+                            </div>
+                            {% for rs in images %}
+                                <div class="item">
+                                    <a href=""><img src="{{ asset('uploads') }}/images/{{ rs.image }}" alt=""></a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <a class="left item-control" href="#similar-product" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a class="right item-control" href="#similar-product" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-7">
+                <div class="product-information"><!--/product-information-->
+                    <h2>{{ data[0].title }}</h2>
+                    <form action="{{ path('shopcart_new') }}" method="post">
+                    <span>
+                        <span>{{ data[0].sprice }}TL</span>
+                        <label>Adet:</label><input type="number" name="shopcart[quantity]" value="1" max="{{ data[0].amount }}" placeholder="Adet"/>
+                        <input type="hidden" name="shopcart[productid]" value="{{ data[0].id }}"/>
+                    </span>
+                    <p><b>Stok Durumu:</b>{{ data[0].status }}</p>
+                        {% if  data[0].categoryid == 17 %}
+                            <p><b>Numara:</b> <select name="shopcart[writer_id]" class="form-control">
+                                    <option value="36">36</option>
+                                    <option value="38">38</option>
+                                    <option value="40">40</option>
+                                    <option value="42">42</option>
+                                </select></p>
+                        {% elseif data[0].categoryid == 18 %}
+                            <p><b>Numara:</b> <select name="shopcart[writer_id]" class="form-control">
+                                    <option value="36">36</option>
+                                    <option value="38">38</option>
+                                    <option value="40">40</option>
+                                    <option value="42">42</option>
+                                </select></p>
+                        {% elseif data[0].categoryid == 20%}
+
+                        {% elseif data[0].categoryid == 21%}
+
+                        {% else %}
+                                <p><b>Beden:</b> <select name="shopcart[size]" class="form-control">
+                                        <option value="XS">XS</option>
+                                        <option value="S">S</option>
+                                        <option value="M">M</option>
+                                        <option value="L">L</option>
+                                        <option value="XL">XL</option>
+                                        <option value="XXL">XXL</option>
+                                    </select></p>
+                        {% endif %}
+                        <input type="hidden" name="token" value="{{ csrf_token('add-item') }}">
+                        <button type="submit" class="btn btn-fefault cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</button>
+                    </form>
+                    <p><b>Marka:</b>{{ data[0].type }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-information">
+            <div class="nav nav-tabs">
+                <b>Ürün Detayları</b>
+            </div>
+            <div class="col-sm-12">
+                {{ data[0].detail|raw }}
+            </div>
+        </div>
+        <!--/category-tab-->
+    </div>
+    </section>
+{% endblock %}

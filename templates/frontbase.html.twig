@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %} Güneş Gözlükleri{% endblock %}">
+    <meta name="author" content="">
+    <title>{% block title %} E -Shopper{% endblock %}</title>
+
+    <meta name="keywords" content="<title> {% block keywords %} deneme{% endblock %}</title>">
+    <link href="{{ asset('assets') }}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('assets') }}/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ asset('assets') }}/css/prettyPhoto.css" rel="stylesheet">
+    <link href="{{ asset('assets') }}/css/price-range.css" rel="stylesheet">
+    <link href="{{ asset('assets') }}/css/animate.css" rel="stylesheet">
+    <link href="{{ asset('assets') }}/css/main.css" rel="stylesheet">
+    <link href="{{ asset('assets') }}/css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="{{ asset('assets') }}/js/html5shiv.js"></script>
+    <script src="{{ asset('assets') }}/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="{{ asset('assets') }}/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ asset('assets') }}/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('assets') }}/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('assets') }}/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('assets') }}/images/ico/apple-touch-icon-57-precomposed.png">
+
+</head><!--/head-->
+
+<body>
+<header id="header"><!--header-->
+    <div class="header-middle"><!--header-middle-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="logo pull-left">
+                        <a href="index.html"><img src="{{ asset('assets') }}/images/home/logo.png" alt=""/></a>
+                    </div>
+                </div>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <div class="col-sm-8">
+                    <div class="shop-menu pull-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#"><i class="fa fa-user"></i>{{ app.user.name }}</a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="{{ path('app_login') }}"><i class="fa fa-check"></i> Hesabım</a></li>
+                                    <li><a href="{{ path('orders_index') }}"><i class="fa fa-check"></i> Siparişlerim</a></li>
+                                    <li><a href="{{ path('shopcart_index') }}"><i class="fa fa-shopping-cart"></i>Sepetim</a></li>
+                                    <li><a href="{{ path('app_logout') }}">Çıkış</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                {% else %}
+                <div class="col-sm-8">
+                    <div class="shop-menu pull-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{ path('app_login') }}"><i class="fa fa-lock"></i> Oturum Aç</a></li>
+                            <li><a href="{{ path('new_user') }}"><i class="fa fa-level-up"></i> Üye Ol</a></li>
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div><!--/header-middle-->
+
+    <div class="header-bottom"><!--header-bottom-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="mainmenu pull-left">
+                        <ul class="nav navbar-nav collapse navbar-collapse">
+                            <li><a href="{{ asset('home') }}" class="active">Anasayfa</a></li>
+                            <li><a href="{{ path('hakkimizda') }}">Hakkımızda</a>
+                            <li><a href="{{ path('referanslar') }}">Ürün İade</a></li>
+                            </li>
+                            <!--<li class="dropdown"><a href="#">Kadın<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    {% for cat in cats %}
+                                        {{ cat|raw }}
+                                    {% endfor %}
+
+                                </ul>
+                            </li>-->
+                            <!--<li class="dropdown"><a href="#">Erkek<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    {% for cat in cats %}
+                                        {{ cat|raw }}
+                                    {% endfor %}
+                                </ul>
+                            </li>-->
+                            <li><a href="{{ path('iletisim') }}">İletişim</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/header-bottom-->
+</header><!--/header-->
+{% block slider %} {% endblock %}
+{% block sidebar %} {% endblock %}
+{% block content %} {% endblock %}
+
+<footer id="footer"><!--Footer-->
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="companyinfo">
+                        <h2><span>e</span>-shopper</h2>
+                        <p>Harca Harca Bitmez!!</p>
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                </div>
+                <div class="col-sm-3">
+                    <div class="address">
+                        <img src="{{ asset('assets') }}/images/home/map.png" alt="" />
+                        <p>Şimdi Her Yerde E -Shopper</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-widget">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="single-widget">
+                        <!--<h3><b>KURUMSAL</b></h3>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="{{ path('hakkimizda') }}">Hakkımızda</a></li>
+                            <li><a href="{{ path('iletisim') }}">Bize Ulaşın</a></li>
+                        </ul>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
+                <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+            </div>
+        </div>
+    </div>
+
+</footer><!--/Footer-->
+
+<script src="{{ asset('assets') }}/js/jquery.js"></script>
+<script src="{{ asset('assets') }}/js/bootstrap.min.js"></script>
+<script src="{{ asset('assets') }}/js/jquery.scrollUp.min.js"></script>
+<script src="{{ asset('assets') }}/js/price-range.js"></script>
+<script src="{{ asset('assets') }}/js/jquery.prettyPhoto.js"></script>
+<script src="{{ asset('assets') }}/js/main.js"></script>
+
+</body>
+</html>

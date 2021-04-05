@@ -1,0 +1,25 @@
+data segment
+
+ends
+
+stack segment
+dw   128  dup(0)
+ends
+
+code segment
+
+mov ax, data
+mov ds, ax
+mov es, ax
+
+mov ax,12h
+mov cl,04h
+add al,cl
+
+
+mov ax, 4c00h
+int 21h
+ends
+
+
+

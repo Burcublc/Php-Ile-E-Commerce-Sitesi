@@ -1,0 +1,109 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}  {{ data[0].title }}/Hakkkımızda {% endblock %}
+{% block keywords %} {{ data[0].keywords}} {% endblock %}
+{% block description %} {{ data[0].description}} {% endblock %}
+{%  block sidebar  %}
+
+    <style>
+        ul#menu-v, #menu-v ul
+        {
+            width:254px; /* Main Menu width */
+            border:1px solid rgba(190,190,190,0.3);
+            list-style:none; margin:0; padding:0;
+            z-index:9;
+        }
+
+        #menu-v li
+        {
+            margin:0;padding:0;
+            position:relative;
+            background-color:#f7e1b5; /*fallback color*/
+            background-color:rgba(0,0,0,0.4);
+            transition:background 0.2s;
+        }
+        #menu-v li:hover
+        {
+            background-color:rgba(0,0,0,0.2);
+        }
+
+        #menu-v a
+        {
+            font:normal 14px Arial;
+            border-top:0px solid rgba(190,190,190,0.3);
+            display:block;
+            color:#EEEEEE;
+            text-decoration:none;
+            line-height:30px;
+            padding-left:22px;
+            position:relative;
+        }
+
+        #menu-v li:first-child a
+        {
+            border-top:0;
+        }
+        #menu-v a:hover {
+            background-color: #f0ad4e;
+            color:white;
+        }
+        #menu-v a.arrow::after{
+            content:'';
+            position:absolute;
+            display:inline;
+            top:50%;
+            margin-top:-4px;
+            right:8px;
+            border-width:4px;
+            border-style:solid;
+            border-color:transparent transparent transparent white;
+            transition:border-color 0.5s;
+        }
+
+        #menu-v li a.arrow:hover::after
+        {
+            border-color:transparent transparent transparent #FFFFFF;
+        }
+
+        /*Sub level menu items
+        ---------------------------------------*/
+        #menu-v li ul
+        {
+            min-width:180px; /* Sub level menu min width */
+            position:absolute;
+            display:none;
+            left:100%;
+            top:50%; transform:translateY(-50%);
+        }
+
+        #menu-v li:hover > ul
+        {
+            display:block;
+        }
+    </style>
+{% endblock %}
+{% block content  %}
+<section id="cart_items">
+    <div class="container">
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td class="image"><h1>Hakkımızda</h1></td>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="cart_product">
+                        <p>
+                            {{ data[0].aboutus|raw }}
+                        </p>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

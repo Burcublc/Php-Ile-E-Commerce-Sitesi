@@ -1,0 +1,99 @@
+{{ include('admin/messages.html.twig') }}
+
+<div class="panel">
+    <form method="post">
+        <div class="col-md-12">
+            <!-- Custom Tabs -->
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1" data-toggle="tab">Genel Bilgiler</a></li>
+                    <li><a href="#tab_2" data-toggle="tab">Email Server</a></li>
+                    <li><a href="#tab_3" data-toggle="tab">Hakkımızda</a></li>
+                    <li><a href="#tab_4" data-toggle="tab">İletişim</a></li>
+                    <li><a href="#tab_5" data-toggle="tab">Sipariş İade Bilgisi</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1">
+                        <b>Genel Bilgiler</b><br><br>
+                        <p>Adı</p>
+                        <input type="text" name="setting[title]" value="{{ setting.title }}" class="form-control" placeholder="Başlık">
+                        <br>
+                        <p>Anahtar Kelimeler</p>
+                        <input type="text" name="setting[keywords]" value="{{ setting.keywords }}" class="form-control" placeholder="Anahtar Kelimeler"><br>
+                        <p>Kısa Açıklamalar</p>
+                        <input type="text" name="setting[description]" value="{{ setting.description }}" class="form-control" placeholder="Açıklama"><br>
+                        <p>Firma Adı:</p>
+                        <input type="text" name="setting[company]" value="{{ setting.company }}" class="form-control" placeholder="Firma Adı.."><br>
+                        <p>Email:</p>
+                        <input type="text" name="setting[email]" value="{{ setting.email }}" class="form-control" placeholder="Email"><br>
+                        <p>Adres:</p>
+                        <input type="text" name="setting[address]" value="{{ setting.address }}" class="form-control" placeholder="Adres"><br>
+                        <p>Fax:</p>
+                        <input type="text" name="setting[fax]" value="{{ setting.fax }}" class="form-control" placeholder="Fax"><br>
+                        <p>Telefon:</p>
+                        <input type="text" name="setting[phone]" value="{{ setting.phone }}" class="form-control" placeholder="Telefon"><br>
+                        <p>Durum:</p>
+
+                        <select name="setting[status]" class="form-control">
+                            <option>{{ setting.status }}</option>
+                            <option>True</option>
+                            <option>False</option>
+                        </select><br>
+                    </div>
+                    <div class="tab-pane" id="tab_2">
+                        <p>Email Server:</p>
+                        <input type="text" name="setting[smtpserver]" value="{{ setting.smtpserver }}" class="form-control" placeholder="">
+                        <br>
+                        <p>Smptp Email:</p>
+                        <input type="text" name="setting[smtpemail]" value="{{ setting.smtpemail }}" class="form-control" placeholder="Email"><br>
+                        <p>Smptp Email Şifre:</p>
+                        <input type="password" name="setting[smtppassword]" value="{{ setting.smtppassword }}" class="form-control" placeholder="Password"><br>
+                        <p>SMTP Port:</p>
+                        <input type="text" name="setting[smtpport]" value="{{ setting.smtpport }}" class="form-control" placeholder="Port"><br>
+                    </div>
+                    <div class="tab-pane" id="tab_3">
+                        <b>Hakkımızda:</b><br><br>
+                        <textarea name="setting[aboutus]" id="aboutus" class="form-control" placeholder="Hakkımızda" rows="4" cols="100">{{ setting.aboutus }}</textarea>
+                    </div>
+                    <div class="tab-pane" id="tab_4">
+                        <b>İletişim Bilgileri:</b><br><br>
+                        <textarea name="setting[contact]" id="contact" class="form-control" placeholder="İletişim" rows="4" cols="100">{{ setting.contact }}</textarea>
+                    </div>
+                    <div class="tab-pane" id="tab_5">
+                        <b>Sipariş İade:</b><br><br>
+                        <textarea name="setting[referances]" id="referances" class="form-control" placeholder="Referanslar" rows="4" cols="500">{{ setting.referances }}</textarea>
+                    </div>
+       </div>
+                <!-- /.tab-content -->
+            </div>
+            <!-- nav-tabs-custom -->
+        </div>
+        <br>
+        <!-- nav-tabs-custom -->
+        <div class="panel-body">
+            <br><br>
+            <button type="submit" class="btn btn-warning pull-right">Kaydet</button>
+        </div>
+    </form>
+</div>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#aboutus' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#contact' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#referances' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
